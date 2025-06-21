@@ -34,16 +34,18 @@ Note : The module doesn't receive anything from DS100, only from plugin.
 
 ## Module interface
 First, global Module parameters :
-#### Pass-thru
-You can select which values to automatically forward straight to the pass-thru device.
+#### Parameters
+You can select which values to automatically forward straight to DS100 device(s) with the "Pass-to DS100" feature.
 
-#### OSC Output pass-thru
-Set accordingly to the DS100 Devices settings. Default is the DS100 default port.
+#### OSC Outputs / Pass-to DS100
+Set IP accordingly to the DS100 Devices settings. Default is the DS100 default port.
 Coordinate mapping is same as it is received.
 
+You may add also a direct full Module input to output pass-through if needed.
+
 ### Values
-Those containers receive the plugin parameters for all objects.
-You may use Chataigne Multiplex mapping to forward those to other Modules or send them modified to DS100 with Commands.
+Those containers receive the plugin parameters for all objects : XY Positions, Reverb levels, Spreads and Delay modes.
+You may use Chataigne Multiplex mapping to forward those to other Modules or to DS100 with Module's Commands.
 
 ## Commands
 Commands are ready to use with the "Command tester" tool, or as outputs from the State machine and Sequences in Time Machine, or from your own scripts.
