@@ -38,7 +38,7 @@ First, global Module parameters :
 You can select which values to automatically forward straight to DS100 device(s) with the "Pass-to DS100" feature.
 
 #### OSC Outputs / Pass-to DS100
-Set IP accordingly to the DS100 Devices settings. Default is the DS100 default port.
+Set IP accordingly to the DS100 Devices settings. Port is already set to DS100 default listening port 50010.
 Coordinate mapping is same as it is received.
 
 You may add also a direct full Module input to output pass-through if needed.
@@ -90,11 +90,11 @@ If you need one OSC command that isn't in the Module yet, the command Custom Mes
 
 - coordinateMappingSourcePositionY(mapping, object, position) : set a specific sound object Y only position in a specified coordinate mapping, range 0-1
 
-- coordinateMappingSourcePoint2D(mapping, object, position) : set a specific sound object position in a specified coordinate mapping, with Chataigne Point2D axis ( limits (-1,-1)-(1,1)), output to default DS100 coordinate mapping, center (0,0) from Chataigne will be @(0.5,0.5), and limits for (X,Y):(0,0)-(1,1).
+- coordinateMappingSourcePoint2D(mapping, object, position) : set a specific sound object position in a specified coordinate mapping, with Chataigne Point2D axis ( limits (-1,-1)-(1,1)), output to default DS100 coordinate mapping convention: center (0,0) from Chataigne will be @(0.5,0.5), and limits for (X,Y):(0,0)-(1,1).
 
 - coordinateMappingSourcePoint3D(mapping, object, position) : set a specific sound object position in a specified coordinate mapping, with Point3D for (X,Y,Z), area limits are (0,0,0)-(1,1,1).
 
-- coordinateMappingSourcePositionPolar(mapping, object, azimuth, distance) : set a specific sound object position in a specified coordinate mapping, in polar coordinates (azimuth,distance), azimuth & distance are floats, range 0-1, output to default DS100 coordinate mapping with center @(0.5,0.5), and limits for (X,Y):(0,0)-(1,1).
+- coordinateMappingSourcePositionPolar(mapping, object, azimuth, distance) : set a specific sound object position in a specified coordinate mapping, in polar coordinates (azimuth,distance), azimuth & distance are floats, range 0-1, output to default DS100 coordinate mapping convention: center @(0.5,0.5), and limits for (X,Y):(0,0)-(1,1).
 
 - reverbSendGain(object, gain) : set the EnSpace reverb level send for a specific object
 
