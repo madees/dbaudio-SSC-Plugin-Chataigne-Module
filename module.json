@@ -1,0 +1,524 @@
+{
+	"name": "d&b Soundscape Plugin",
+	"type": "OSC",
+	"path": "Immersive solution",
+	
+	"version": "1.0",
+	"description": "Module to catch the d&b audiotechnik Soundscpae DAW Plugin OSC and send commands to d&b DS100, evntually with pass-thru.\n\nPlease visit https://www.dbsoundscape.com/ to learn more about d&b Soundscape and DS100, especially download the TI501 'd&b Soundscape System design and operation' and DS100 OSC protocol white paper.\n\nChataigne Module specific documentation can be found in the README on GitHub:",
+	"url": "https://github.com/madees/dbaudio-SSC-Plugin-Chataigne-Module",
+	"downloadURL": "https://github.com/madees/dbaudio-SSC-Plugin-Chataigne-Module/archive/master.zip",
+	
+	"hasInput": true,
+	"hasOutput": true, 
+	"hideDefaultCommands": false,
+	"hideDefaultParameters": [
+		"colorSendMode",
+		"autoRange",
+		"autoFeedback",
+		"input",
+		"outputs",
+		"useHierarchy",
+		"colorSendMode",
+		"autoAdd",
+		"booleanSendMode",
+		"clearValues",
+		"oscOutputs/pass-thru/listenToFeedback"
+	],
+	
+	"defaults": {
+		"autoAdd": false,
+		"oscInput": {
+			"localPort": 50010
+		},
+		"OSC Outputs": {
+			"Pass-thru": {
+				"local": false,
+				"remoteHost": "192.168.1.100",
+				"remotePort": 50010
+			}
+		}
+	},
+	
+	"parameters": {
+		"Pass-thru XY": {
+			"type": "Boolean",
+			"default":false
+		},
+		"Pass-thru Reverb": {
+			"type": "Boolean",
+			"default":false
+		},
+		"Pass-thru Spread": {
+			"type": "Boolean",
+			"default":false
+		},
+		"Pass-thru Delay": {
+			"type": "Boolean",
+			"default":false
+		}
+	},
+	
+	"scripts": [
+		"SSC-Plugin-osc.js"
+	],
+	
+	"values": {
+	},
+	
+	"commands": 
+	{
+		"deviceClear":
+		{
+			"menu":"",
+			"callback":"deviceClear",
+			"parameters":
+			{
+			}
+		},
+
+		"masterOutputLevel":
+		{
+			"menu":"",
+			"callback":"masterOutputLevel",
+			"parameters":
+			{
+				"Level":
+				{
+					"type":"Float",
+					"min":-120,
+					"max":24
+				}
+			}
+		},
+
+		"reverbRoomId":
+		{
+			"menu":"EnSpace",
+			"callback":"reverbRoomId",
+			"parameters":
+			{
+				"RoomId":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":9
+				}
+			}
+		},
+
+		"preDelayFactor":
+		{
+			"menu":"EnSpace",
+			"callback":"preDelayFactor",
+			"parameters":
+			{
+				"Factor":
+				{
+					"type":"Float",
+					"min":0.2,
+					"max":2
+				}
+			}
+		},
+
+		"rearLevel":
+		{
+			"menu":"EnSpace",
+			"callback":"rearLevel",
+			"parameters":
+			{
+				"Rear level":
+				{
+					"type":"Float",
+					"min":-24,
+					"max":24
+				}
+			}
+		},
+		
+		"nextScene":
+		{
+			"menu":"Scenes",
+			"callback":"nextScene",
+			"parameters":
+			{
+			}
+		},
+			
+		"previousScene":
+		{
+			"menu":"Scenes",
+			"callback":"previousScene",
+			"parameters":
+			{
+			}
+		},
+		
+		"sceneRecall":
+		{
+			"menu":"Scenes",
+			"callback":"sceneRecall",
+			"parameters":
+			{
+				"Major index":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":999
+				},
+				"Minor index":
+				{	"type":"Integer",
+					"min":0,
+					"max":99
+				}
+			}
+		},
+		
+		"sourceSpread":
+		{
+			"menu":"Sound Objects",
+			"callback":"sourceSpread",
+			"parameters":
+			{
+				"Object":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Spread":
+				{
+					"type":"Float",
+					"min":0,
+					"max":1
+				}
+			}
+		},
+
+		"sourceDelayMode":
+		{
+			"menu":"Sound Objects",
+			"callback":"sourceDelayMode",
+			"parameters":
+			{
+				"Object":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Delay Mode":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":2
+				}
+			}
+		},
+
+		"coordinateMappingSourcePositionX":
+		{
+			"menu":"Sound Objects",
+			"callback":"coordinateMappingSourcePositionX",
+			"parameters":
+			{
+				"Coordinate Mapping":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":4
+				},
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"X Position":
+				{
+					"type":"Float",
+					"min":0,
+					"max":1
+				}	
+			}
+		},
+
+		"coordinateMappingSourcePositionY":
+		{
+			"menu":"Sound Objects",
+			"callback":"coordinateMappingSourcePositionY",
+			"parameters":
+			{
+				"Coordinate Mapping":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":4
+				},
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Y Position":
+				{
+					"type":"Float",
+					"min":0,
+					"max":1
+				}	
+			}
+		},
+
+		"coordinateMappingSourcePositionZ":
+		{
+			"menu":"Sound Objects",
+			"callback":"coordinateMappingSourcePositionZ",
+			"parameters":
+			{
+				"Coordinate Mapping":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":4
+				},
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Z Position":
+				{
+					"type":"Float",
+					"min":0,
+					"max":1
+				}	
+			}
+		},
+
+		"coordinateMappingSourcePositionXY":
+		{
+			"menu":"Sound Objects",
+			"callback":"coordinateMappingSourcePositionXY",
+			"parameters":
+			{
+				"Coordinate Mapping":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":4
+				},
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Position (X,Y)":
+				{
+					"type":"Point2D",
+					"min":[0,0],
+					"max":[1,1]
+				}	
+			}
+		},
+
+		"coordinateMappingSourcePoint3D":
+		{
+			"menu":"Sound Objects",
+			"callback":"coordinateMappingSourcePoint3D",
+			"parameters":
+			{
+				"Coordinate Mapping":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":4
+				},
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Position (X,Y,Z)":
+				{
+					"type":"Point3D",
+					"min":[0,0,0],
+					"max":[1,1,1]
+				}	
+			}
+		},
+
+		"coordinateMappingSourcePoint2D":
+		{
+			"menu":"Sound Objects",
+			"callback":"coordinateMappingSourcePoint2D",
+			"parameters":
+			{
+				"Coordinate Mapping":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":4
+				},
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Position (X,Y)":
+				{
+					"type":"Point2D",
+					"min":[-1,-1],
+					"max":[1,1]
+				}	
+			}
+		},
+
+		"coordinateMappingSourcePositionPolar":
+		{
+			"menu":"Sound Objects",
+			"callback":"coordinateMappingSourcePositionPolar",
+			"parameters":
+			{
+				"Coordinate Mapping":
+				{
+					"type":"Integer",
+					"min":0,
+					"max":4
+				},
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Azimuth":
+				{
+					"type":"Float",
+					"min":0,
+					"max":1
+				},
+				"Distance":
+				{
+					"type":"Float",
+					"min":0,
+					"max":1
+				}
+			}
+		},
+		
+		"reverbSendGain":
+		{
+			"menu":"Sound Objects",
+			"callback":"reverbSendGain",
+			"parameters":
+			{
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Send gain dB":
+				{
+					"type":"Float",
+					"min":-120,
+					"max":24
+				}
+			}
+		},
+
+		"matrixInputGain":
+		{
+			"menu":"Sound Objects",
+			"callback":"matrixInputGain",
+			"parameters":
+			{
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Gain dB":
+				{
+					"type":"Float",
+					"min":-120,
+					"max":24
+				}
+			}
+		},
+		"matrixInputMute":
+		{
+			"menu":"Sound Objects",
+			"callback":"matrixInputMute",
+			"parameters":
+			{
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Mute":
+				{
+					"type":"Boolean"
+				}
+			}
+		},
+		"FGOutputMute":
+		{
+			"menu":"Sound Objects",
+			"callback":"FGOutputMute",
+			"parameters":
+			{
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Function Group #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":32
+				},
+				"Mute":
+				{
+					"type":"Boolean"
+				}
+			}
+		},
+		"FGOutputGain":
+		{
+			"menu":"Sound Objects",
+			"callback":"FGOutputGain",
+			"parameters":
+			{
+				"Sound Object #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":128
+				},
+				"Function Group #":
+				{
+					"type":"Integer",
+					"min":1,
+					"max":32
+				},
+				"Gain dB":
+				{
+					"type":"Float",
+					"min":-120,
+					"max":24
+				}
+			}
+		}
+	}
+}
