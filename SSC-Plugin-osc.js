@@ -92,13 +92,13 @@ function init()
 	// Add 64 values into those containers
 	for (var i = 1; i <= 64; i++) {
     	xy[i]= XYContainer.addPoint2DParameter(i, "XY");
-		xy[i].setAttribute("readonly", true);
+		//xy[i].setAttribute("readonly", true);
 		reverb[i]= reverbContainer.addFloatParameter(i, "Reverb", 0, -120, 24);
-		reverb[i].setAttribute("readonly", true);
+		//reverb[i].setAttribute("readonly", true);
 		spread[i]= spreadContainer.addFloatParameter(i, "Spread", 0, 0, 1);
-		spread[i].setAttribute("readonly", true);
+		//spread[i].setAttribute("readonly", true);
 		delay[i]= delayContainer.addIntParameter(i, "Delay", 0, 0, 2);
-		delay[i].setAttribute("readonly", true);
+		//delay[i].setAttribute("readonly", true);
     	};
 }
 
@@ -126,31 +126,63 @@ function moduleValueChanged(value)
  */
 function oscEvent(address, args, originIp)
 {
-	if (local.match(address, OSCPing+"/")) local.sendTo(originIp, 50011, OSCPong); // turn on the blue indicator
-	else if (local.match(address, OSCPositionXY+"/*/*/")) // this is position XY
+	if (local.match(address, OSCPing)) local.sendTo(originIp, 50011, OSCPong); // turn on the blue indicator
+	else if (local.match(address, OSCPositionXY+"*/*/")) // this is position XY
 		{
 			id=parseInt(address.substring(OSCPositionXY.length+2, address.length)); // add 2 to skip coordinate mapping ID
 			mapping=parseInt(address.substring(OSCPositionXY.length, OSCPositionXY.length+1)); // ? usefull to store the mappings as values ? TBC, from now just used for pass thru
-			xy[id].set(args[0], args[1]);
-			if(local.parameters.pass_thruXY.get()) coordinateMappingSourcePositionXY(mapping, id, xy[id].get()); // pass-thru
+			if(args.length==0)
+			{
+				// no args means RX mode on plugin, so send back the value to it
+				local.sendTo(originIp, 50011, OSCPositionXY+mapping+"/"+id+"/", xy[id].get());
+			}
+			else
+			{
+				xy[id].set(args[0], args[1]);
+				if(local.parameters.pass_thruXY.get()) coordinateMappingSourcePositionXY(mapping, id, xy[id].get()); // pass-thru
+			}
 		}
-	else if (local.match(address, OSCRevGain+"/*/")) // this is En-Space send level
+	else if (local.match(address, OSCRevGain+"*/")) // this is En-Space send level
 		{
 			id=parseInt(address.substring(OSCRevGain.length, address.length));
-			reverb[id].set(args[0]);
-			if(local.parameters.pass_thruReverb.get()) reverbSendGain(id, reverb[id].get()); // pass-thru
+			if(args.length==0)
+			{
+				// no args means RX mode on plugin, so send back the value to it
+				local.sendTo(originIp, 50011, OSCRevGain+id+"/", reverb[id].get());
+			}
+			else
+			{
+				reverb[id].set(args[0]);
+				if(local.parameters.pass_thruReverb.get()) reverbSendGain(id, reverb[id].get()); // pass-thru
+			}
 		}
-	else if (local.match(address, OSCSpread+"/*/")) // this is Spread level
+	else if (local.match(address, OSCSpread+"*/")) // this is Spread level
 		{
 			id=parseInt(address.substring(OSCSpread.length, address.length));
-			spread[id].set(args[0]);
-			if(local.parameters.pass_thruSpread.get()) sourceSpread(id, spread[id].get()); // pass-thru
+			if(args.length==0)
+			{
+				// no args means RX mode on plugin, so send back the value to it
+				local.sendTo(originIp, 50011, OSCSpread+id+"/", spread[id].get());
+			}
+			else
+			{
+				spread[id].set(args[0]);
+				if(local.parameters.pass_thruSpread.get()) sourceSpread(id, spread[id].get()); // pass-thru
+			}
 		}
-	else if (local.match(address, OSCDelayMode+"/*/")) // this is Delay mode (as integer 0=off, 1=tight, 2=full)
+	else if (local.match(address, OSCDelayMode+"*/")) // this is Delay mode (as integer 0=off, 1=tight, 2=full)
 		{
 			id=parseInt(address.substring(OSCDelayMode.length, address.length));
-			delay[id].set(args[0]);
-			if(local.parameters.pass_thruDelay.get()) sourceDelayMode(id, delay[id].get()); // pass-thru
+			if(args.length==0)
+			{
+				// no args means RX mode on plugin, so send back the value to it
+				local.sendTo(originIp, 50011, OSCDelayMode+id+"/", delay[id].get());
+			}
+			else
+			{
+				delay[id].set(args[0]);
+				if(local.parameters.pass_thruDelay.get()) sourceDelayMode(id, delay[id].get()); // pass-thru
+			}
 		}
 	else 
 		{
