@@ -29,7 +29,7 @@ If you activate RX mode on Plugin, Chataigne will sent back to it the Values. Th
 
 It is possible to activate pass-tru of those values to DS100.
 
-Additionally, you may use Module Commands to control DS100 parameters directly from this same Module, like remap the Values before sending them to DS100.
+Additionally, you may use Module Commands to control DS100 parameters directly from this same Module, like remap the Values before sending them to DS100, re-patching the objects ID up to 128...
 Note : The module doesn't receive anything from DS100, only from plugin.
 
 ## Module interface
