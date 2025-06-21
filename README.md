@@ -50,7 +50,7 @@ Commands are ready to use with the "Command tester" tool, or as outputs from the
 
 #### Common arguments
 - gain is in dB, float, -120 to +24 range
-- object is sound object (input matrix channel), integer, 1 to 64 range
+- object is sound object (input matrix channel), integer, 1 to 128 range
 - mapping is the DS100 coordinate mapping area as specified in R1, integer. 0 will use the global module parameter, or specific area form 1 to 4.
 
 Here is the command list, if you need to know more about arguments type and ranges, please refer to the https://www.dbaudio.com/assets/products/downloads/manuals-documentation/electronics/dbaudio-osc-protocol-ds100-1.3.7-en.pdf
