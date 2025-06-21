@@ -31,7 +31,7 @@
 			"localPort": 50010
 		},
 		"OSC Outputs": {
-			"Pass-thru": {
+			"Pass-to DS100": {
 				"local": false,
 				"remoteHost": "192.168.1.100",
 				"remotePort": 50010
@@ -40,19 +40,19 @@
 	},
 	
 	"parameters": {
-		"Pass-thru XY": {
+		"Pass-to DS100 XY": {
 			"type": "Boolean",
 			"default":false
 		},
-		"Pass-thru Reverb": {
+		"Pass-to DS100 Reverb": {
 			"type": "Boolean",
 			"default":false
 		},
-		"Pass-thru Spread": {
+		"Pass-to DS100 Spread": {
 			"type": "Boolean",
 			"default":false
 		},
-		"Pass-thru Delay": {
+		"Pass-to DS100 Delay": {
 			"type": "Boolean",
 			"default":false
 		}

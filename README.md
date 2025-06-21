@@ -27,7 +27,7 @@ Just set the Plugin's IP setting to Chataigne IP. The plugin indicator should tu
 
 If you activate RX mode on Plugin, Chataigne will sent back to it the Values. This could be usefull to write Plugin automation from Chataigne without a DS100.
 
-It is possible to activate pass-tru of those values to DS100.
+It is possible to activate selective pass-to DS100s of the Values that need to be forward straight to DS100, and global pass-throughs.
 
 Additionally, you may use Module Commands to control DS100 parameters directly from this same Module, like remap the Values before sending them to DS100, re-patching the objects ID up to 128...
 Note : The module doesn't receive anything from DS100, only from plugin.
