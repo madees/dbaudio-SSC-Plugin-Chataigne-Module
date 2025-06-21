@@ -22,11 +22,15 @@ https://discord.com/invite/ngnJ5z my contact there is also "madees".
 To install the Custom Module, download it as ZIP file and extract it to your /Chataigne/Modules folder
 
 ## Principle of use
-Receives OSC sent by the plugins to modules's Values containers. Values are read only.
+Receives OSC sent by the plugins in TX mode to modules's Values containers.
 Just set the Plugin's IP setting to Chataigne IP. The plugin indicator should turn on blue if the connection is OK.
 
+If you activate RX mode on plugin, Chataigne will sent back to it the Values.
+
 It is possible to activate pass-tru of those values to DS100.
-Additionally, you may use Module Commands to control DS100 parameters from this same module, like remap the Values before sending them to DS100.
+
+Additionally, you may use Module Commands to control DS100 parameters directly from this same Module, like remap the Values before sending them to DS100.
+Note : The module doesn't receive anything from DS100, only from plugin.
 
 ## Module interface
 First, global Module parameters :
