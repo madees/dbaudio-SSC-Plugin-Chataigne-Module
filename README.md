@@ -28,14 +28,14 @@ Additionally, you may use Module Commands to control DS100 parameters from this 
 
 ## Module interface
 First, global Module parameters :
-#### - Pass-thru
+#### Pass-thru
 You can select which values to automatically forward straight to the pass-thru device.
 
-#### - OSC Output pass-thru
+#### OSC Output pass-thru
 Set accordingly to the DS100 Devices settings. Default is the DS100 default port.
 Coordinate mapping is same as it is received.
 
-#### - Values
+### Values
 Those containers receive the plugin parameters for all objects.
 You may use Chataigne Multiplex mapping to forward those to other Modules or send them modified to DS100 with Commands.
 
