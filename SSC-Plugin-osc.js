@@ -68,6 +68,7 @@ var OSCMeter ="/dbaudio1/matrixinput/levelmeterpremute/";
  * Global variables
  */
 var xy = [];
+var map = [];
 var reverb = [];
 var spread = [];
 var delay = [];
@@ -81,6 +82,8 @@ function init()
 	// Add Sound Objects Positions XY, reverb, spread and delay containers of values
 	XYContainer = local.values.addContainer("XY", "X and Y values for each objects");
 	XYContainer.setCollapsed(true);
+	mapContainer = local.values.addContainer("Mapping", "Positionning coordinate mapping for each objects");
+	mapContainer.setCollapsed(true);
 	reverbContainer = local.values.addContainer("Reverb", "En-Space level for each objects");
 	reverbContainer.setCollapsed(true);
 	spreadContainer = local.values.addContainer("Spread", "Spread for each objects");
@@ -92,13 +95,10 @@ function init()
 	// Add 64 values into those containers
 	for (var i = 1; i <= 64; i++) {
     	xy[i]= XYContainer.addPoint2DParameter(i, "XY");
-		//xy[i].setAttribute("readonly", true);
+		map[i]= mapContainer.addIntParameter(i, "Mapping", 1, 1, 4);
 		reverb[i]= reverbContainer.addFloatParameter(i, "Reverb", 0, -120, 24);
-		//reverb[i].setAttribute("readonly", true);
 		spread[i]= spreadContainer.addFloatParameter(i, "Spread", 0, 0, 1);
-		//spread[i].setAttribute("readonly", true);
 		delay[i]= delayContainer.addIntParameter(i, "Delay", 0, 0, 2);
-		//delay[i].setAttribute("readonly", true);
     	};
 }
 
@@ -130,7 +130,7 @@ function oscEvent(address, args, originIp)
 	else if (local.match(address, OSCPositionXY+"*/*/")) // this is position XY
 		{
 			id=parseInt(address.substring(OSCPositionXY.length+2, address.length)); // add 2 to skip coordinate mapping ID
-			mapping=parseInt(address.substring(OSCPositionXY.length, OSCPositionXY.length+1)); // ? usefull to store the mappings as values ? TBC, from now just used for pass-throughs
+			mapping=parseInt(address.substring(OSCPositionXY.length, OSCPositionXY.length+1));
 			if(args.length==0)
 			{
 				// no args means RX mode on plugin, so send back the value to it
@@ -139,6 +139,7 @@ function oscEvent(address, args, originIp)
 			else
 			{
 				xy[id].set(args[0], args[1]);
+				map[id].set(mapping);
 				if(local.parameters.pass_toDS100XY.get()) coordinateMappingSourcePositionXY(mapping, id, xy[id].get()); // pass-through positions
 			}
 		}
@@ -311,7 +312,7 @@ function sourceDelayMode(object, mode)
 function coordinateMappingSourcePositionX(coordinateMapping, object, X) 
 {
 	if (coordinateMapping==0) {
-		coordinateMapping=defaultCoordinateMapping;
+		coordinateMapping=map[object].get();
 		}
 	local.send(OSCPositionX + coordinateMapping + "/" + object, X);
 }
@@ -325,7 +326,7 @@ function coordinateMappingSourcePositionX(coordinateMapping, object, X)
 function coordinateMappingSourcePositionY(coordinateMapping, object, Y) 
 {
 	if (coordinateMapping==0) {
-		coordinateMapping=defaultCoordinateMapping;
+		coordinateMapping=map[object].get();
 		}
 	local.send(OSCPositionY + coordinateMapping + "/" + object, Y );
 }
@@ -339,7 +340,7 @@ function coordinateMappingSourcePositionY(coordinateMapping, object, Y)
 function coordinateMappingSourcePositionZ(coordinateMapping, object, Z) 
 {
 	if (coordinateMapping==0) {
-		coordinateMapping=defaultCoordinateMapping;
+		coordinateMapping=map[object].get();
 		}
 	local.send(OSCPositionZ + coordinateMapping + "/" + object, Z );
 }
@@ -353,7 +354,7 @@ function coordinateMappingSourcePositionZ(coordinateMapping, object, Z)
 function coordinateMappingSourcePositionXY(coordinateMapping, object, position) 
 {
 	if (coordinateMapping==0) {
-		coordinateMapping=defaultCoordinateMapping;
+		coordinateMapping=map[object].get();
 		}
 	local.send(OSCPositionXY + coordinateMapping + "/" + object, position[0] , position[1] );
 }
@@ -367,7 +368,7 @@ function coordinateMappingSourcePositionXY(coordinateMapping, object, position)
 function coordinateMappingSourcePoint3D(coordinateMapping, object, position) 
 {
 	if (coordinateMapping==0) {
-		coordinateMapping=defaultCoordinateMapping;
+		coordinateMapping=map[object].get();
 		}
 	local.send(OSCPositionXYZ + coordinateMapping + "/" + object, position[0] , position[1], position[2]);
 }

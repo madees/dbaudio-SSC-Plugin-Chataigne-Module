@@ -4,7 +4,7 @@
 	"path": "Immersive solution",
 	
 	"version": "1.0",
-	"description": "Module to catch the d&b audiotechnik Soundscpae DAW Plugin OSC and send commands to d&b DS100, evntually with pass-thru.\n\nPlease visit https://www.dbsoundscape.com/ to learn more about d&b Soundscape and DS100, especially download the TI501 'd&b Soundscape System design and operation' and DS100 OSC protocol white paper.\n\nChataigne Module specific documentation can be found in the README on GitHub:",
+	"description": "Module to catch the d&b audiotechnik Soundscpae DAW Plugin OSC and send commands to d&b DS100, eventually with pass-through.\n\nPlease visit https://www.dbsoundscape.com/ to learn more about d&b Soundscape and DS100, especially download the TI501 'd&b Soundscape System design and operation' and DS100 OSC protocol white paper.\n\nChataigne Module specific documentation can be found in the README on GitHub:",
 	"url": "https://github.com/madees/dbaudio-SSC-Plugin-Chataigne-Module",
 	"downloadURL": "https://github.com/madees/dbaudio-SSC-Plugin-Chataigne-Module/archive/master.zip",
 	
@@ -21,8 +21,7 @@
 		"colorSendMode",
 		"autoAdd",
 		"booleanSendMode",
-		"clearValues",
-		"oscOutputs/pass-thru/listenToFeedback"
+		"clearValues"
 	],
 	
 	"defaults": {
@@ -42,18 +41,22 @@
 	"parameters": {
 		"Pass-to DS100 XY": {
 			"type": "Boolean",
+			"description":"Pass through sound object position XY in coordinate mapping",
 			"default":false
 		},
 		"Pass-to DS100 Reverb": {
 			"type": "Boolean",
+			"description":"Pass through sound object reverb level",
 			"default":false
 		},
 		"Pass-to DS100 Spread": {
 			"type": "Boolean",
+			"description":"Pass through sound object spread",
 			"default":false
 		},
 		"Pass-to DS100 Delay": {
 			"type": "Boolean",
+			"description":"Pass through sound object delay mode",
 			"default":false
 		}
 	},
