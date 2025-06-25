@@ -1,5 +1,6 @@
-# dbaudio Soundscape DAW OSC Plugin Chataigne module
-Chataigne module to catch up OSC sent by d&b Soundscape OSC Plug-ins: https://github.com/dbaudio-soundscape.  
+# dbaudio Soundscape OSC Plugin Chataigne module
+Chataigne module to catch up OSC sent by d&b Soundscape OSC Plug-ins: https://github.com/dbaudio-soundscape.
+It basically emulate a DS100 on its OSC coms.
 
 This community module is NOT OFFICIALLY supported by d&b audiotechnik.
 It is publicly available to enable interested users to experiment, extend and create their own adaptations.
@@ -31,6 +32,10 @@ It is possible to activate selective pass-to DS100s of the Values that need to b
 
 Additionally, you may use Module Commands to control DS100 parameters directly from this same Module, like remap the Values before sending them to DS100, re-patching the objects ID up to 128...
 Note : The module doesn't receive anything from DS100, only from plugin.
+It creates three coms :
+1. Receive on port 50010 OSC from plugin TX
+2. Send answers to plugin RX polling on port 50011 (feedback to plugin IP)
+3. Pass-through and control DS100 hardware with port 50010 ("Pass to DS100" IP)
 
 ## Module interface
 First, global Module parameters :
