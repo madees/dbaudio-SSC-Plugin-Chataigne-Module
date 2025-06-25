@@ -1,6 +1,6 @@
 # dbaudio Soundscape OSC Plugin Chataigne module
-Chataigne module to catch up OSC sent by d&b Soundscape OSC Plug-ins: https://github.com/dbaudio-soundscape.
-It basically emulate a DS100 on its OSC coms.
+Chataigne module to catch up OSC sent by d&b Soundscape OSC Plug-ins: https://github.com/dbaudio-soundscape. 
+It emulates a DS100 on its OSC coms, so can be useful also to log and beta test OSC thirds control commands without a DS100 hardwarebelow hands.
 
 This community module is NOT OFFICIALLY supported by d&b audiotechnik.
 It is publicly available to enable interested users to experiment, extend and create their own adaptations.
